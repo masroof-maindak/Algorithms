@@ -4,7 +4,6 @@
 #include <list>
 
 std::list<int> mergeLL(std::list<int>& a, std::list<int>& b) {
-
     std::list<int> ret;
     
     while (!a.empty() and !b.empty()) {
@@ -37,11 +36,10 @@ void mergeSortLL(std::list<int>& l) {
     std::list<int> left, right;
     int middle = l.size() / 2;
     for (auto it = l.begin(); it != l.end(); it++) {
-        if (std::distance(l.begin(), it) < middle) {
+        if (std::distance(l.begin(), it) < middle)
             left.push_back(*it);
-        } else {
+        else
             right.push_back(*it);
-        }
     }
 
     mergeSortLL(left);
@@ -70,10 +68,11 @@ std::vector<int> merge(std::vector<int>& a, std::vector<int>& b) {
 }
 
 void iterativeMergeSortWithQueue(std::vector<int>& v) {
-    // Essentially a bottom up approach, I think.
+    // Bottom up approach to usual, recursive merge sort.
     std::queue<std::vector<int>> q;
     
-    for (auto x : v)
+    // Push individual elements to queue
+    for (int x : v)
         q.push({x});
 
     while (q.size() > 1) {

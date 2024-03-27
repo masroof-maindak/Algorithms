@@ -41,7 +41,7 @@ int msaSum(int arr[], int left, int right) {
     return max(msaSum(arr, left, mid - 1), msaSum(arr, mid + 1, right), maxCrossingSum(arr, left, mid, right)); 
 }
 
-int msaKadane(int arr[], int size) {
+int msaSumKadane(int arr[], int size) {
     int prevLocalMax = 0, globalMax = INT_MIN;
 
     for (int i = 0; i < size; i++) {
@@ -56,7 +56,7 @@ int main() {
     int arr[] = {2, 3, 4, 5, 7};
     int size = sizeof(arr) / sizeof(arr[0]);
     cout << "Maximum contiguous sum is " << msaSum(arr, 0, size - 1) << endl;
-    cout << "Maximum contiguous sum is " << msaKadane(arr, size) << endl;
+    cout << "Maximum contiguous sum is " << msaSumKadane(arr, size) << endl;
     
     return 0; 
 }

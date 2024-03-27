@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 
+// Median of medians
 int indexOfMedian (std::vector<int>& nums, int left, int right) {
     if (right - left < 5) {
         std::sort(nums.begin() + left, nums.begin() + right + 1);
@@ -13,9 +14,11 @@ int indexOfMedian (std::vector<int>& nums, int left, int right) {
     for (int i = left; i < right; i += 5) {
         int bucketEndIndex = std::min(i + 4, right);
         int medianOfBucket = indexOfMedian(nums, i, bucketEndIndex);
+        // Place i'th bucket's median at i'th position
         std::swap(nums[medianOfBucket], nums[left + (i - left) / 5]);
     }
 
+    // Recursively find median of medians (i.e first 'numOfBuckets' number of elements)
     return indexOfMedian(nums, left, left + (int)std::ceil((right - left) / 5.0) - 1);
 }
 
