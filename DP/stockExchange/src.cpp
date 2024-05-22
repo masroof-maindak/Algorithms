@@ -19,8 +19,8 @@ int maxProfit(vector<int>& prices) {
 int maxProfit2(vector<int>& prices) {
     int ret = 0, n = prices.size();
     for (int i = 1; i < n; i++)
-        if (prices[i] > prices[i-1])
-            ret += (prices[i] - prices[i-1]);
+        if (prices[i] > prices[i-1])    //if price on curr day is higher than prior day
+            ret += (prices[i] - prices[i-1]);   //then 'buy & sell,' i.e add the difference to profit
     return ret;
 }
 
