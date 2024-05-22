@@ -4,16 +4,16 @@
 
 using namespace std;
 
-int LISSS (vector<int> a) {
+int findLISSS (vector<int> a) {
     int n = a.size();
-    vector<int> lisss (n, 0);
-    lisss[n] = 1;   // last index' size is going to be 1 unconditionally
+    vector<int> lisss (n, 1);
     int ret = 1;
 
+    // no reason to do it in reverse, this just popped into my head first
     for (int i = n - 1; i >= 0; i--) {
-        for (int j = n; j > i ; j--)
+        for (int j = n; j > i; j--)
             if (a[i] < a[j])
-                lisss[i] = max(lisss[i], lisss[i] + lisss[j]);
+                lisss[i] = max(lisss[i], 1 + lisss[j]);
         ret = max(ret, lisss[i]);
     }
     
