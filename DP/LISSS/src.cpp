@@ -5,9 +5,8 @@
 using namespace std;
 
 int findLISSS (vector<int> a) {
-    int n = a.size();
+    int n = a.size(), ret = 1;
     vector<int> lisss (n, 1);
-    int ret = 1;
 
     // no reason to do it in reverse, this just popped into my head first
     for (int i = n - 1; i >= 0; i--) {
