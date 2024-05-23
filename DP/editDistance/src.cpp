@@ -1,4 +1,3 @@
-// Matrix Chain Multiplication AKA parenthesization
 #include <iostream>
 #include <vector>
 #include <algorithm>
