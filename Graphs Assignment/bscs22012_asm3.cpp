@@ -1,9 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-
-#define min(a, b) (a < b ? a : b)
-#define INT_MAX 2147483647
+#include <climits>
 
 bool isCyclic(std::vector<std::vector<int>> &g) {
     if (g.size() == 0)
@@ -22,7 +20,6 @@ bool isCyclic(std::vector<std::vector<int>> &g) {
         for (int v = 0; v < g[0].size(); v++) {
             if (g[u][v] and visited[v])
                 return true;
-                
             if (g[u][v] and !visited[v]) {
                 visited[v] = true;
                 q.push(v);
@@ -39,12 +36,11 @@ std::vector<int> dijkstra(std::vector<std::vector<int>> &g, int origin) {
     std::vector<bool> visited (n, false);
     dist[origin] = 0;
 
-    //priority queue to store vertices by distance (pair<distance, vertex>)
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq;
+    std::priority_queue< std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>> > pq;
     pq.push(std::make_pair(0, origin));
 
     while (!pq.empty()) {
-        // get the vertex with the minimum distance
+        // get the vertex with the minimum distance (pair is compared by first element)
         int u = pq.top().second;
         pq.pop();
 
