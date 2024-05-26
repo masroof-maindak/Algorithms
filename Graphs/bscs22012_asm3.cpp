@@ -33,25 +33,35 @@ bool isCyclic(std::vector<std::vector<int>> &g) {
     return false;
 }
 
-std::vector<int> dijkstra(std::vector<std::vector<int>> &g, int originVert) {
+std::vector<int> dijkstra(std::vector<std::vector<int>> &g, int origin) {
     int n = g[0].size();
     std::vector<int> dist (n, INT_MAX);
     std::vector<bool> visited (n, false);
-    dist[originVert] = 0;
+    dist[origin] = 0;
 
-    for (int i = 0; i < n; i++) {
-        //select unvisited node/node with minimum cost
-        int u = -1; 
-        for (int j = 0; j < n; j++)
-            if (!visited[j] and (u == -1 or dist[j] < dist[u]))
-                u = j;
+    //priority queue to store vertices by distance (pair<distance, vertex>)
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq;
+    pq.push(std::make_pair(0, origin));
+
+    while (!pq.empty()) {
+        // get the vertex with the minimum distance
+        int u = pq.top().second;
+        pq.pop();
+
+        // skip if already visited
+        if (visited[u])
+            continue;
 
         // mark as visited
         visited[u] = true;
 
-        // update adjacent nodes' cost
-        for (int v = 0; v < n; v++)
-            dist[v] = min(dist[v], dist[u] + g[u][v]);
+        // pick unvisited adjacent vertices and update distance if shorter path found
+        for (int v = 0; v < n; v++) {
+            if (g[u][v] != INT_MAX and !visited[v] and dist[u] + g[u][v] < dist[v]) {
+                dist[v] = dist[u] + g[u][v];
+                pq.push(std::make_pair(dist[v], v));
+            }
+        }
     }
 
     return dist;
