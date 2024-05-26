@@ -67,5 +67,3 @@ vector<int> bellmanFordAdjList(vector<vector<Edge>> &graph, int origin) {
 
     return dist;
 }
-
-    
