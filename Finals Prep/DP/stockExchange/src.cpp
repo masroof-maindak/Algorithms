@@ -9,7 +9,7 @@ int maxProfit(vector<int>& prices) {
     for (int i = 0; i < N; i++) {
         if (i > 0)
             temp = prices[i] - prices[i-1]; //convert to MSA problem
-        profit = max(temp, profit + temp);  //Kadane's algorithm
+        profit = max(temp, profit + temp);  //Kadane's algorithm on MSA
         ret = max(ret, profit);
     }
     return ret;

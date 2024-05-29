@@ -12,21 +12,21 @@ int maxValue(vector<int> weights, vector<int> values, int cap) {
     // mat[i][w] = maximum value that can be obtained
     // with the first i items, and a capacity of w
 
-    for (int i = 1; i <= n; i++) {
-        for (int w = 0; w <= cap; w++) {
+    for (int i = 1; i <= n; i++) { // for every item, incrementally (0 items = 0 value)
+        for (int w = 0; w <= cap; w++) { // for every possible capacity
             if (weights[i - 1] <= w) { 
                 // if item i-1 fits inside capacity w
                 // then it might be a contender for the max value
 
-                int includingItem = values[i-1] + mat[i - 1][w - weights[i - 1]]; // value of item i-1 + max value that can fit in the remaining capacity
-                int excludingItem = mat[i-1][w]; // max value @ previous capacity
+                int includingItem = values[i-1] + mat[i-1][w-weights[i-1]]; 
+                            // value of item i-1 + max value that can fit in the remaining capacity
+                int excludingItem = mat[i-1][w]; // max value @ previous item
 
                 mat[i][w] = max(includingItem, excludingItem);
 
             } else {
                 // if item i-1 doesn't fit in capacity w
                 // then the max value has to be the same as the previous capacity
-
                 mat[i][w] = mat[i - 1][w];
             }
         }

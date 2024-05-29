@@ -19,6 +19,7 @@ int longestCommonSubsequence(string x, string y) {
 
 // Longest Palindromic Subsequence
 int LPS (string s) {
+    // LPS(s) = LCS(s, reverse(s))
     string rev = s;
     reverse(rev.begin(), rev.end());
     return longestCommonSubsequence(s, rev);

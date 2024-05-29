@@ -8,16 +8,16 @@ int min (int a, int b) {
 
 int minCoinNumber (int target, vector<int> coins) {
     //same principle as rod cutting. Add what's left to the previous 'best' solution
-    int n = coins.size();
-    vector<int> coinNums(target + 1, target + 1); // at worst, you will need target coins to make target
-    coinNums[0] = 0;  // 0 coins needed to make 0
+    vector<int> coinNum(target + 1, target + 1); // at worst, you will need 'target' coins to make target
+    coinNum[0] = 0;  // 0 coins needed to make 0 ('base case')
 
-    for (int i = 1; i <= target; i++)   // for each target value
-        for (int j = 0; j < n; j++)    // for each coin
-            if (coins[j] <= i)          // if the coin is less than or equal to the target
-                coinNums[i] = min(coinNums[i], coinNums[i - coins[j]] + 1); // add the coin to the previous best solution
+    for (int i = 1; i <= target; i++)  // for each target value, starting from 1 (0 is already solved)
+        for (int coinVal : coins)     // for each coin value
+            if (coinVal <= i)          // if the value is less than or equal to the target
+                coinNum[i] = min(coinNum[i], coinNum[i - coinVal] + 1); // add the coin to the previous best solution
 
-    return (coinNums[target] <= target) ? coinNums[target] : -1;
+    return (coinNum[target] <= target) ? coinNum[target] : -1; 
+    // if the value at the target's index is still target+1, it means the target value is not possible
 }
 
 int main() {

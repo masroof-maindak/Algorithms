@@ -18,7 +18,7 @@ bool isCyclic(std::vector<std::vector<int>> &g) {
         q.pop();
 
         for (int v = 0; v < g[0].size(); v++) {
-            if (g[u][v] and visited[v])
+            if (g[u][v] and visited[v]) //if vertex is adjacent and already visited, cycle detected 
                 return true;
             if (g[u][v] and !visited[v]) {
                 visited[v] = true;

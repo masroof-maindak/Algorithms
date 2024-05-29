@@ -9,7 +9,7 @@ int minOperationNumber(vector<int> dimensions) {
     vector<vector<int>> minMults(n, vector<int>(n, 0));
     // minMults[i][j] = min number of multiplications to multiply the chain from A_i ... A_j
 
-    for (int chainSize = 2; chainSize < n; chainSize++) {
+    for (int chainSize = 2; chainSize < n; chainSize++) { // chain of size 0 = trivial, chain of size 1 = 0 mults
         for (int i = 1; i < n - chainSize + 1; i++) {
             // 'chain' = A_i ... A_j
             int j = i + chainSize - 1; 
@@ -20,7 +20,7 @@ int minOperationNumber(vector<int> dimensions) {
                 int subchainsCost = minMults[i][k] + minMults[k+1][j];  // cost of multiplying the two subchains comprising this chain
                 int splitCost = dimensions[i-1] * dimensions[k] * dimensions[j]; // cost of multipliying the two matrices at the split
                 int cost = subchainsCost + splitCost;
-                minMults[i][j] = min(minMults[i][j], cost);
+                minMults[i][j] = min(minMults[i][j], cost); // min(new cost, current cost)
             }
         }
     }

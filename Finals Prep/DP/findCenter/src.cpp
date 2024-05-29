@@ -33,22 +33,24 @@ int findCenter (vector<vector<int>> g) {
     vector<vector<int>> dist = FloydWarshall(g);
 
     // Print distance matrix
+    /*
     for (int i = 0; i < dist.size(); i++) {
         for (int j = 0; j < dist[i].size(); j++)
             cout << dist[i][j] << " ";
         cout << "\n";
     }
     cout << "\n";
+    */
 
     int v = g.size();
     int center = 0;
     int minDist = INF;
 
-    for (int i = 0; i < v; i++) {
+    for (int i = 0; i < v; i++) {   // loop through each node
         int maxDist = 0;
-        for (int j = 0; j < v; j++) // loop through each nodes' adjacent nodes' distances
+        for (int j = 0; j < v; j++) // for each node, check its adjacent nodes' distances from it
             maxDist = max(maxDist, dist[i][j]);
-        if (maxDist < minDist) {    // update center if new center has smaller max distance
+        if (maxDist < minDist) {    // set it as the center if its max distance is less than the current min
             minDist = maxDist;
             center = i;
         }
