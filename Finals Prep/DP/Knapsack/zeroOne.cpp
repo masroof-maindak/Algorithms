@@ -26,8 +26,8 @@ int maxValue(vector<int> weights, vector<int> values, int cap) {
 
             } else {
                 // if item i-1 doesn't fit in capacity w
-                // then the max value has to be the same as the previous capacity
-                mat[i][w] = mat[i - 1][w];
+                // then the max value has to be the same as the previous capacity unconditionally
+                mat[i][w] = mat[i-1][w];
             }
         }
     }

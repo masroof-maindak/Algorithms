@@ -15,7 +15,8 @@ int minCoinNumber (int target, vector<int> coins) {
         for (int coinVal : coins)     // for each coin value
             if (coinVal <= i)          // if the value is less than or equal to the target
                 coinNum[i] = min(coinNum[i], coinNum[i - coinVal] + 1); // add the coin to the previous best solution
-
+            //coinNum[100] = min(coinNum[100], coinNum[98] + 1)
+    
     return (coinNum[target] <= target) ? coinNum[target] : -1; 
     // if the value at the target's index is still target+1, it means the target value is not possible
 }
