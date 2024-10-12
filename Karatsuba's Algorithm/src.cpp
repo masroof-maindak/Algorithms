@@ -2,8 +2,8 @@
 #include <stdint.h>
 #include <vector>
 
-void printVec(std::vector<uint8_t> a) {
-	for (int x : a)
+void print(std::vector<uint8_t> a) {
+	for (auto x : a)
 		std::cout << x;
 	std::cout << std::endl;
 }
@@ -89,7 +89,7 @@ std::vector<uint8_t> rec3(std::vector<uint8_t> x, std::vector<uint8_t> y) {
 	 * of the recursive call made in P3, where we have to (possibly) multiply an
 	 * n bit number with an n+1 bit number. */
 
-	/* Base case */
+	/* https://en.cppreference.com/w/cpp/language/implicit_conversion#Integral_promotion */
 	if (n == 1)
 		return {static_cast<uint8_t>(x[0] * y[0])};
 
@@ -156,7 +156,7 @@ std::vector<uint8_t> rec4(std::vector<uint8_t> x, std::vector<uint8_t> y) {
 }
 
 int main() {
-	printVec(rec3({1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 0, 0, 0, 0}));
-	printVec(rec4({1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 0, 0, 0, 0}));
+	print(rec3({1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 0, 0, 0, 0}));
+	print(rec4({1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 0, 0, 0, 0}));
 	return 0;
 }
