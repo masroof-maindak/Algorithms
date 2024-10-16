@@ -89,7 +89,9 @@ std::vector<uint8_t> rec3(std::vector<uint8_t> x, std::vector<uint8_t> y) {
 	 * of the recursive call made in P3, where we have to (possibly) multiply an
 	 * n bit number with an n+1 bit number. */
 
-	/* https://en.cppreference.com/w/cpp/language/implicit_conversion#Integral_promotion */
+	/*
+	https://en.cppreference.com/w/cpp/language/implicit_conversion#Integral_promotion
+	*/
 	if (n == 1)
 		return {static_cast<uint8_t>(x[0] * y[0])};
 
