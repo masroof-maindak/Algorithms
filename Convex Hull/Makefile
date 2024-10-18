@@ -1,2 +1,2 @@
 Default:
-	g++ src.cpp && ./a.out
+	g++ src.cpp chp.cpp && ./a.out
