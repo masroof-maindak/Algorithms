@@ -5,10 +5,6 @@
 #include <vector>
 
 namespace chp {
-
-struct Point;
-using pset = std::vector<Point>;
-
 struct Point {
 	double x, y;
 
@@ -25,13 +21,13 @@ struct Point {
 		return out;
 	}
 };
+using pset = std::vector<Point>;
 
 void print(const pset &h);
 bool leftHandTurn(const Point &P, const Point &Q, const Point &R);
 
 pset grahamScan(const pset &P);
 pset giftWrapping(pset &P);
-
 } // namespace chp
 
 #endif // CHP_H

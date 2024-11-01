@@ -38,7 +38,7 @@ pset chp::grahamScan(const pset &P) {
 	uCH.push_back(sortP[0]);
 	uCH.push_back(sortP[1]);
 
-	/* TODO */
+	/* FIXME */
 	/* Upper hull */
 	for (size_t i = 2; i < P.size(); i++) {
 		while (leftHandTurn(uCH[uCH.size() - 2], uCH[uCH.size() - 1], P[i]))
