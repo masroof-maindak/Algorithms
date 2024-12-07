@@ -13,7 +13,7 @@ int LISSS(vector<int> a) {
 	for (int i = n - 1; i >= 0; i--) {
 
 		/* start from the end and check every element until i */
-		for (int j = n; j > i; j--)
+		for (int j = n - 1; j > i; j--)
 			/* iff a[i] < a[j] (i.e increasing subsequence) */
 			if (a[i] < a[j])
 				lisss[i] = max(lisss[i], 1 + lisss[j]);
