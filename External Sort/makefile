@@ -1,6 +1,6 @@
 Default:
 rng:
-	g++ generateRandomFile.cpp -o rngF
+	g++ generate-random-file.cpp -o rngF
 sorter:
 	g++ src.cpp -o extS
 
@@ -10,4 +10,4 @@ run:
 	clear && ./extS random.bin
 
 clean:
-	rm -f randomGenerator sort *.bin
+	rm -f rngF extS *.bin
