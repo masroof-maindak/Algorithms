@@ -5,7 +5,7 @@
 using namespace chp;
 
 void chp::print(const pset &h) {
-	for (auto &v : h)
+	for (auto v : h)
 		std::cout << v.x << " " << v.y << "\n";
 	std::cout << std::endl;
 }
