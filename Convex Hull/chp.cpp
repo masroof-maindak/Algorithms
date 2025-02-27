@@ -10,7 +10,7 @@ void chp::print(const pset &h) {
 	std::cout << std::endl;
 }
 
-bool chp::leftHandTurn(const Point &P, const Point &Q, const Point &R) {
+bool chp::left_hand_turn(const Point &P, const Point &Q, const Point &R) {
 
 	/*
 	 * | Px Py 1 |
@@ -26,32 +26,50 @@ bool chp::leftHandTurn(const Point &P, const Point &Q, const Point &R) {
 	return (Q.x - P.x) * (R.y - P.y) - (Q.y - P.y) * (R.x - P.x) > 0;
 }
 
-pset chp::grahamScan(const pset &P) {
+pset chp::graham_scan(const pset &P) {
 	if (P.size() < 3)
 		return {};
 
-	pset uCH = {}, lCH = {}, sortP = P;
+	pset upper_h = {}, lower_h = {}, s_p = P, s_lower_p = {}, s_upper_p = {};
 
-	std::sort(sortP.begin(), sortP.end(),
+	std::sort(s_p.begin(), s_p.end(),
 			  [](const Point &a, const Point &b) { return a.x < b.x; });
 
-	uCH.push_back(sortP[0]);
-	uCH.push_back(sortP[1]);
+	for (auto x : s_p)
+		x.y < 0 ? s_lower_p.emplace_back(x) : s_upper_p.emplace_back(x); 
 
-	/* FIXME */
+	// NOTE: the first two points must not be collinear w/ other points on the
+	// y-axis
+	upper_h.emplace_back(s_upper_p[0]);
+	upper_h.emplace_back(s_upper_p[1]);
+
+	lower_h.emplace_back(s_lower_p[0]);
+	lower_h.emplace_back(s_lower_p[1]);
+
 	/* Upper hull */
-	for (size_t i = 2; i < P.size(); i++) {
-		while (leftHandTurn(uCH[uCH.size() - 2], uCH[uCH.size() - 1], P[i]))
-			uCH.pop_back();
-		uCH.push_back(P[i]);
+	for (size_t i = 2; i < s_upper_p.size(); i++) {
+		while (left_hand_turn(upper_h[upper_h.size() - 2],
+							  upper_h[upper_h.size() - 1], s_upper_p[i]))
+			upper_h.pop_back();
+		upper_h.emplace_back(s_upper_p[i]);
 	}
 
-	print(uCH);
+	/* Lower hull */
+	for (size_t i = 2; i < s_lower_p.size(); i++) {
+		while (!left_hand_turn(lower_h[lower_h.size() - 2],
+							   lower_h[lower_h.size() - 1], s_lower_p[i]))
+			lower_h.pop_back();
+		lower_h.emplace_back(s_lower_p[i]);
+	}
 
-	return uCH;
+	pset ret;
+	ret.reserve(upper_h.size() + lower_h.size());
+	ret.insert(ret.end(), upper_h.begin(), upper_h.end());
+	ret.insert(ret.end(), lower_h.begin(), lower_h.end());
+	return ret;
 }
 
-pset chp::giftWrapping(pset &P) {
+pset chp::gift_wrapping(pset &P) {
 	if (P.size() < 3)
 		return {};
 
@@ -69,7 +87,7 @@ pset chp::giftWrapping(pset &P) {
 		CH.emplace_back(end);
 		end = P[0] == CH.back() ? P[1] : P[0];
 		for (size_t i = 1; i < P.size(); i++)
-			if (leftHandTurn(CH.back(), end, P[i]))
+			if (left_hand_turn(CH.back(), end, P[i]))
 				end = P[i];
 	} while (end != CH[0]);
 

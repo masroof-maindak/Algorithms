@@ -24,10 +24,10 @@ struct Point {
 using pset = std::vector<Point>;
 
 void print(const pset &h);
-bool leftHandTurn(const Point &P, const Point &Q, const Point &R);
+bool left_hand_turn(const Point &P, const Point &Q, const Point &R);
 
-pset grahamScan(const pset &P);
-pset giftWrapping(pset &P);
+pset graham_scan(const pset &P);
+pset gift_wrapping(pset &P);
 } // namespace chp
 
 #endif // CHP_H
